@@ -9,7 +9,6 @@ ENV SERVER_PASSWORD="Secret"
 ENV SERVER_PORT="2456"
 ENV APPDIR="/valheim-server"
 ENV DATADIR="/valheim-data"
-RUN echo "export DATADIR=$DATADIR" >> ~/.bashrc
 
 # Create directories
 RUN mkdir -p "$APPDIR" && mkdir -p "$DATADIR"
@@ -27,6 +26,3 @@ WORKDIR $APPDIR
 
 # Start Valheim Server
 CMD ["exec", "/bin/bash /run_valheim_server.sh"]
-
-# Open ports
-EXPOSE 2456/udp 2457/udp 2458/udp 2456/tcp 2457/tcp 2458/tcp

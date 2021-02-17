@@ -1,5 +1,8 @@
-from cm2network/steamcmd
+FROM cm2network/steamcmd:latest
 
 SHELL ["/bin/bash", "-c"]
 
-CMD /home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/valheim-server +app_update 896660 +quit
+COPY steamcmd/update_valheim.sh update_valheim.sh
+COPY steamcmd/check_update_valheim.sh check_update_valheim.sh
+
+CMD ["/bin/bash update_valheim.sh"]

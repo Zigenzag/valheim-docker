@@ -1,0 +1,6 @@
+SERVER_NAME="My Server"
+SERVER_WORLD="Dedicated"
+SERVER_PASSWORD="Secret"
+SERVER_PORT="2456"
+APPDIR="/valheim-server"
+DATADIR="/valheim-data"
