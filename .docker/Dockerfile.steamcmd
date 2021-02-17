@@ -1,8 +1,0 @@
-FROM cm2network/steamcmd:latest
-
-SHELL ["/bin/bash", "-c"]
-
-COPY steamcmd/update_valheim.sh update_valheim.sh
-COPY steamcmd/check_update_valheim.sh check_update_valheim.sh
-
-CMD ["/bin/bash update_valheim.sh"]

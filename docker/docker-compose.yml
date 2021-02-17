@@ -4,15 +4,15 @@ services:
     container_name: valheim-server
     build:
       context: .
-      dockerfile: Dockerfile.valheim
+      dockerfile: docker/Dockerfile.valheim
     restart: always
-    environment:
-      - SERVER_NAME=IKEA World
-      - SERVER_WORLD=Dedicated
-      - SERVER_PASSWORD=wootwoot
+    stop_signal: SIGINT
+    env_file:
+      - /home/valheim/valheim-docker/config
     volumes:
       - /home/valheim/server:/valheim-server:ro
       - /home/valheim/data:/valheim-data
+      - /home/valheim/logs:/valheim-logs
     ports:
       - "2456:2456/udp"
       - "2457:2457/udp"

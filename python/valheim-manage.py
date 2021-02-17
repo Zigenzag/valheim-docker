@@ -1,7 +1,13 @@
 from includes.steamcmd import SteamCMD
-import sys, os
+from includes.baseclass import BaseClass
+import os, sys
 
-class ValheimManage:
+class ValheimManage(BaseClass):
+
+    def _invoke(self, command: str):
+        stream = os.popen(command)
+        return stream.read()
+
     def update(self):
         continue_update = False
         steamcmd = SteamCMD()
@@ -13,9 +19,17 @@ class ValheimManage:
                 continue_update = True
 
         if continue_update:
+            self.stop()
             steamcmd.update()
             with open('/home/valheim/server/version', 'w') as filehandle:
                 filehandle.write(change_number)
+            self.start()
+    
+    def start(self):
+        print( self._invoke('cd /home/valheim/valheim-docker/docker && docker-compose up --detach') )
+
+    def stop(self):
+        print( self._invoke('cd /home/valheim/valheim-docker/docker && docker-compose down') )
     
     def backup(self):
         pass

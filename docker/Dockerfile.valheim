@@ -1,6 +1,7 @@
 FROM ubuntu:focal
 
 SHELL ["/bin/bash", "-c"]
+STOPSIGNAL SIGINT
 
 # Default Environment
 ENV SERVER_NAME="My Server"
@@ -9,9 +10,10 @@ ENV SERVER_PASSWORD="Secret"
 ENV SERVER_PORT="2456"
 ENV APPDIR="/valheim-server"
 ENV DATADIR="/valheim-data"
+ENV LOGDIR="/valheim-logs"
 
 # Create directories
-RUN mkdir -p "$APPDIR" && mkdir -p "$DATADIR"
+RUN mkdir -p "$APPDIR" && mkdir -p "$DATADIR" && mkdir -p "$LOGDIR" && mkdir -p "${LOGDIR}/archive"
 
 # Install packages
 RUN dpkg --add-architecture i386
@@ -20,7 +22,7 @@ RUN add-apt-repository universe && apt-get update -y
 RUN apt-get install -y lib32stdc++6 lib32gcc1 libsdl2-2.0-0
 
 # Configure APPDIR
-COPY .docker/valheim/run_valheim_server.sh "$APPDIR/run_valheim_server.sh"
+COPY docker/valheim/run_valheim_server.sh "$APPDIR/run_valheim_server.sh"
 RUN chmod +x "$APPDIR/run_valheim_server.sh"
 WORKDIR $APPDIR
 
