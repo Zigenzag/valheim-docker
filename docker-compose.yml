@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  valheim-server:
+    container_name: valheim-server
+    build:
+      context: .
+      dockerfile: .dockerfiles/Dockerfile.valheim
+    restart: always
+    environment:
+      - SERVER_NAME=IKEA World
+      - SERVER_WORLD=Dedicated
+      - SERVER_PASSWORD=wootwoot
+    volumes:
+      - valheim-server:/valheim-server
+      - valheim-data:/valheim-data
+    ports:
+      - "2456:2456/tcp"
+      - "2456:2456/udp"
+      - "2457:2457/tcp"
+      - "2457:2457/udp"
+      - "2458:2458/tcp"
+      - "2458:2458/udp"
+    expose:
+      - "2456/tcp"
+      - "2456/udp"
+      - "2457/tcp"
+      - "2457/udp"
+      - "2458/tcp"
+      - "2458/udp"
