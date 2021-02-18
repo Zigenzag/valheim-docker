@@ -36,7 +36,11 @@ class ValheimManage(BaseClass):
 
 if __name__ == '__main__':
     manager = ValheimManage()
-    if "update" in sys.argv:
+    if "update" in sys.argv[1]:
         manager.update()
-    elif "backup" in sys.argv:
+    elif "backup" in sys.argv[1]:
+        manager.backup()
+    elif "start" in sys.argv[1]:
+        manager.backup()
+    elif "stop" in sys.argv[1]:
         manager.backup()
