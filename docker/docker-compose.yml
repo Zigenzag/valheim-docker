@@ -3,7 +3,7 @@ services:
   valheim-server:
     container_name: valheim-server
     build:
-      context: .
+      context: /home/valheim/valheim-docker
       dockerfile: docker/Dockerfile.valheim
     restart: always
     stop_signal: SIGINT
